@@ -1,7 +1,7 @@
 import './App.css';
-import Header from './Header'
-import Newsfeed from './Newsfeed'
-import Stats from './Stats'
+import Header from '../Header/Header'
+import Newsfeed from '../Newsfeed/Newsfeed'
+import Stats from '../Stats/Stats'
 
 function App() {
   return (

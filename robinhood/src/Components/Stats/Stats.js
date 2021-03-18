@@ -13,8 +13,9 @@ function Stats() {
 
                     </div>
                 </div>
+
                 <div className="stats__header">
-                    <p>Stocks</p>
+                    <p>Lists</p>
                 </div>
                 <div className="stats__content">
                     <div className="stats__rows">
