@@ -6,18 +6,18 @@ function Header() {
     return (
         <div className="header__wrapper">
             {/* logo */}
-            <div class="header__logo">
+            <div className="header__logo">
                 <img src={Logo} width={25} />
             </div>
 
             {/* search */}
-            <div class="header__search">
-                <div class="header__searchContainer">
+            <div className="header__search">
+                <div className="header__searchContainer">
                     <input placeholder="Search" type="text" />
                 </div>
             </div>
             {/* menuitems */}
-            <div class="header__menuItems">
+            <div className="header__menuItems">
                 <a href="#">Free Stocks</a>
                 <a href="#">Portfolio</a>
                 <a href="#">Cash</a>
