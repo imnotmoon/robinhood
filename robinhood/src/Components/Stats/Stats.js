@@ -2,23 +2,42 @@ import React, { useState, useEffect } from 'react'
 import './Stats.css'
 import key from '../../key'
 import axios from 'axios'
+import StatsRow from '../StatsRow/StatsRow'
 
 const BASE_URL = "https://finnhub.io/api/v1/quote"
 
 function Stats() {
 
-    const [stockData, setStockData] = useState([])
+    const [stocksData, setStocksData] = useState([])
 
-    const getStockData = () => {
-
-    }
-
-    useEffect((stock) => {
+    const getStockData = (stock) => {
         return axios
-            .get(`${BASE_URL}?${stock}$token=${key}`)
+            .get(`${BASE_URL}?symbol=${stock}&token=${key}`)
             .catch((error) => {
                 console.error("Error", error.message);
             });
+    }
+
+    useEffect(() => {
+        let tempStocksData = []
+        const stocksList = ["AAPL", "MSFT", "TSLA", "FB", "BABA", "UBER", "DIS", "SBUX"]
+        let promises = [];
+        stocksList.map((stock) => {
+            promises.push(
+                getStockData(stock)
+                    .then((res) => {
+                        tempStocksData.push({
+                            name: stock,
+                            ...res.data
+                        });
+                    })
+            )
+        });
+
+        Promise.all(promises).then(() => {
+            setStocksData(tempStocksData);
+            console.log("stocksData : ", stocksData);
+        });
     }, [])
 
     return (
@@ -38,6 +57,16 @@ function Stats() {
                 </div>
                 <div className="stats__content">
                     <div className="stats__rows">
+                        {stocksData.map(stock => {
+                            return (
+                                <StatsRow
+                                    key={stock.name}
+                                    name={stock.name}
+                                    openPrice={stock.o}
+                                    price={stock.c}
+                                />
+                            )
+                        })}
 
                     </div>
                 </div>
